@@ -398,17 +398,17 @@ class Planner():
 
         sols = self.solveSingleControl(x0,opponent_state_vec)
 
-        # self.plotTrack()
-        # # initial state
-        # self.plotCar(x0)
-        # # target state
-        # #self.plotCar(xref)
-        # for (u_vec, state_traj) in sols:
-        #     self.plotStateTraj(state_traj)
-        # for opponent in opponent_state_vec:
-        #     self.plotOpponent(opponent)
-        # plt.axis('equal')
-        # plt.show()
+        self.plotTrack()
+        # initial state
+        self.plotCar(x0)
+        # target state
+        #self.plotCar(xref)
+        for (u_vec, state_traj) in sols:
+            self.plotStateTraj(state_traj)
+        for opponent in opponent_state_vec:
+            self.plotOpponent(opponent)
+        plt.axis('equal')
+        plt.show()
 
     def verifyCost(self,u):
         mpc = self.mpc
