@@ -3,10 +3,10 @@
 # trajectory does not start at vehicle position, maybe p calculation is not as good as before cartesianToCurvilinear
 
 # MPC based trajectory planner
-from common import *
+# from common import *
 import matplotlib.pyplot as plt
 import numpy as np
-from planner.MPC import MPC
+from MPC import MPC
 from time import time
 from math import floor
 from itertools import product
@@ -21,9 +21,9 @@ from scipy.optimize import minimize
 # in curvilinear coord conversion, search for shorter range
 # drop irrelevant opponent ASAP
 
-class Planner(ConfigObject):
+class Planner():
     def __init__(self,config=None):
-        super().__init__(config)
+        # super().__init__(config)
         self.config = config
         # NOTE these will be overridded by config file
         # p: prediction horizon
@@ -35,6 +35,12 @@ class Planner(ConfigObject):
         self.dt = 0.1
         self.skip_count = 0
         '''
+        self.N=20 
+        self.opponent_lookahead_time=1.0 
+        self.same_side_passing_threshold=2.0 
+        self.dt=0.1
+        self.skip_count=3
+
         #self.opponent_length = 0.21*2
         #self.opponent_width = 0.12*2
         self.opponent_length = 0.21*2
@@ -392,17 +398,17 @@ class Planner(ConfigObject):
 
         sols = self.solveSingleControl(x0,opponent_state_vec)
 
-        self.plotTrack()
-        # initial state
-        self.plotCar(x0)
-        # target state
-        #self.plotCar(xref)
-        for (u_vec, state_traj) in sols:
-            self.plotStateTraj(state_traj)
-        for opponent in opponent_state_vec:
-            self.plotOpponent(opponent)
-        plt.axis('equal')
-        plt.show()
+        # self.plotTrack()
+        # # initial state
+        # self.plotCar(x0)
+        # # target state
+        # #self.plotCar(xref)
+        # for (u_vec, state_traj) in sols:
+        #     self.plotStateTraj(state_traj)
+        # for opponent in opponent_state_vec:
+        #     self.plotOpponent(opponent)
+        # plt.axis('equal')
+        # plt.show()
 
     def verifyCost(self,u):
         mpc = self.mpc
