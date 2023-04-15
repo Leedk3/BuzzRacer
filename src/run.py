@@ -174,6 +174,6 @@ if __name__ == '__main__':
     experiment.init()
     experiment.run()
     experiment.timer.summary()
-    #experiment.cars[0].controller.p.summary()
+    experiment.cars[0].controller.p.summary()
 
     print_info("program complete")
